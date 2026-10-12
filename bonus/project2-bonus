@@ -1,0 +1,9 @@
+#!/usr/bin/env escript
+%%! +S 4:4
+-mode(compile).
+main(Args) ->
+    Dir = filename:dirname(escript:script_name()),
+    case compile:file(filename:join([Dir,"src","bonus_sim.erl"]), [binary,report_errors,report_warnings]) of
+        {ok, bonus_sim, Bin} -> code:load_binary(bonus_sim, "bonus_sim.erl", Bin), bonus_sim:main(Args);
+        _ -> halt(1)
+    end.

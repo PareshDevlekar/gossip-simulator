@@ -1,0 +1,20 @@
+{
+  "platform": "Darwin-25.0.0-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "otp": "29",
+  "schedulers": 4,
+  "trials": 3,
+  "timeout_ms": 8000,
+  "sizes": [
+    16,
+    64,
+    144,
+    256,
+    400,
+    900
+  ],
+  "seed_per_trial": "1000 + trial",
+  "timer": "erlang:monotonic_time(microsecond)",
+  "termination": "strict: gossip full coverage; push-sum first local actor termination",
+  "timed_scope": "initial start message through coordinator convergence; excludes VM launch, compilation, topology setup and cleanup"
+}

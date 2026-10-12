@@ -1,0 +1,9 @@
+# Temporary report renders and extracted archive checks
+/tmp/
+
+# Generated runtime and editor files
+__pycache__/
+*.py[cod]
+*.beam
+erl_crash.dump
+.DS_Store

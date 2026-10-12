@@ -1,0 +1,22 @@
+{
+  "platform": "Darwin-25.0.0-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "otp": "29",
+  "schedulers": 4,
+  "requested_nodes": 36,
+  "trials": 8,
+  "timeout_ms": 300,
+  "probabilities": [
+    0,
+    0.01,
+    0.05,
+    0.1,
+    0.2,
+    0.4,
+    1
+  ],
+  "seeds": "2000 + trial",
+  "termination": "strict: gossip full coverage; push-sum first local termination",
+  "failure_model": "Each unique unordered neighbor pair independently fails with probability p before start and remains failed. Messages on failed pairs are discarded. No retries, repair or failure detection.",
+  "timed_scope": "Start after setup; end on convergence report or deadline. Router instrumentation is included. Statistics are a post-timing router snapshot."
+}
