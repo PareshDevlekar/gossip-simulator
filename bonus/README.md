@@ -63,8 +63,8 @@ python3 scripts/benchmark.py --nodes 64 --trials 20 --timeout 1000 --probabiliti
 
 This replaces the raw results. Regenerate the PDF and archive afterward. The report derives numerical findings from the CSV. Completion rates are observed within the chosen deadline; a timeout does not prove that eventual convergence is impossible.
 
-## Submission
+## Files
 
 `Report-bonus.pdf` explains the model, tests, parameter sweep, plots, observations and limitations. `project2-bonus.zip` includes this README, runnable source, tests, scripts, report and raw data. The report is also supplied separately at the project root.
 
-Only permanent connection failure is claimed. Node death and temporary outages are not implemented. No fault-tolerant mass recovery is claimed.
+The failure model uses permanent connection outages. Dropped mass is not recovered.

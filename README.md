@@ -34,13 +34,13 @@ Default termination mode: `strict`. Optional `PROJECT2_TERMINATION=global` is de
 - Push-sum initializes s=i, w=1, starts at one actor, adds incoming mass and sends half on each reception. Three successive ratio changes strictly below 1e-10 produce a local convergence report.
 - Monotonic microsecond timing, deterministic per-actor random seeds, bounded runs, monitored workers, teardown, topology/algorithm checks, raw benchmark data, and a four-page PDF with two vector plots.
 
-## Convergence and termination choices (read before submission)
+## Convergence and termination
 
 The assignment gives local termination rules but does not specify one global convergence rule. This implementation makes the following choices explicit:
 
-**Gossip:** global convergence means every actor has heard the rumor at least once. Every actor still follows the ten-reception transmission cutoff, but the simulator may stop before all actors reach ten. Gossip can die out before full coverage; the timeout records this rather than claiming success.
+**Gossip:** global convergence means every actor has heard the rumor at least once. Every actor still follows the ten-reception transmission cutoff, but the simulator may stop before all actors reach ten. Gossip can die out before full coverage; the run is recorded as a timeout.
 
-**Push-sum (default `strict`):** each actor literally exits after its ratio changes by less than 1e-10 on three consecutive receptions. The first such actor notification ends the measured run. This is **first local convergence**, not a claim that every actor converged or that the average is accurate. With one receive-driven circulating message chain, waiting for every actor to exit can stall after the first actor terminates. The assignment does not specify the global criterion; this choice is explicit in both output documentation and the report.
+**Push-sum (default `strict`):** each actor literally exits after its ratio changes by less than 1e-10 on three consecutive receptions. The first such actor notification ends the measured run. This measures **first local convergence**. Other actors may still be unstable, and the estimate may differ from the correct average. With one receive-driven circulating message chain, waiting for every actor to exit can stall after the first actor terminates. The assignment does not specify the global criterion; this choice is explicit in both output documentation and the report.
 
 **Optional `global` mode:** `PROJECT2_TERMINATION=global ./project2 100 full push-sum` waits for every actor's latest local stability report. Stable actors continue accepting and forwarding mass, and later unstable receptions revoke their reports. This conserves mass but extends the assignment's literal local actor-exit rule. The included measurements use the default strict mode. Both modes ultimately stop and clean up all remaining actors.
 
@@ -83,13 +83,13 @@ The benchmark replaces the CSV and environment metadata. Regenerate the PDF and 
 
 See `Report.pdf` for means, spreads, failures, findings and limitations. Raw observations are in `results/experiments.csv`, aggregated observations in `results/summary.csv`, and environment details in `results/environment.json`.
 
-## Files and submission
+## Files
 
 - `project2`: runnable escript entry point.
 - `src/gossip_sim.erl`: simulator, actors and topology generation.
 - `tests/simulator_tests.escript`: topology, rounding, singleton, convergence and timeout checks.
 - `scripts/`: reproducible benchmark, vector PDF generation and archive creation.
 - `Report.pdf`: report with team names and two convergence plots.
-- `project2.zip`: submission archive with source, README, report, tests, scripts and measurements.
+- `project2.zip`: archive with source, README, report, tests, scripts and measurements.
 
-No bonus implementation is claimed. Submit the README, report and `project2.zip` through eLearning as directed by the course. The archive contains copies of the README and report as well.
+The bonus implementation is in `bonus/`, with its own report and archive.
